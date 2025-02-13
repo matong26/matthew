@@ -7,9 +7,26 @@
 
 
 .logo1 {
-    margin-top: 100px;
+    margin-top: 10vh; /* Uses viewport height for better scaling */
     font-family: 'Koulen', sans-serif;
-    font-size: 48px;
+    font-size: 4vw; /* Scales based on viewport width */
+    text-align: center; /* Ensures it's centered on smaller screens */
+}
+
+/* Adjust font size for smaller screens */
+@media (max-width: 768px) {
+    .logo1 {
+        font-size: 6vw;
+        margin-top: 5vh;
+    }
+}
+
+/* Further adjustments for mobile */
+@media (max-width: 480px) {
+    .logo1 {
+        font-size: 8vw;
+        margin-top: 3vh;
+    }
 }
 
 .logo2 {
@@ -48,28 +65,59 @@ body {
     background-image: url('img/image-bg-1.png');
 }
 
-img{
-    max-width: 500px;
+img {
+    max-width: 80%; /* Ensures the image never exceeds its container */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Removes extra space below inline images */
+    margin: 0 auto; /* Centers the image */
 }
+
+/* Limit max width on larger screens */
+@media (min-width: 700px) {
+    img {
+        max-width: 500px; /* Restricts size on large screens */
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
+
 
 .star{
     margin-top: -70px;
 }
 
-button{
+button {
     display: flex;
-    color: var(--white);
     align-items: center;
+    justify-content: center; /* Ensures content is centered */
+    color: var(--white);
     font-family: 'Kreon', serif;
-    font-size: 20px;
+    font-size: clamp(16px, 2vw, 20px); /* Responsive font size */
     background-color: var(--primary-color);
-    padding: 12px 24px;
+    padding: 10px 20px; /* Default padding */
     gap: 8px;
     border: none;
     cursor: pointer;
     transition: 0.3s;
     border-radius: 8px;
 }
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    button {
+        font-size: 18px;
+        padding: 10px 16px;
+    }
+}
+
+/* Adjustments for mobile screens */
+@media (max-width: 480px) {
+    button {
+        font-size: 16px;
+        padding: 8px 14px;
+    }
+}
+
 
 #ready-btn, #start-btn{
     position: fixed;
@@ -90,19 +138,37 @@ button:hover{
 
 .footer-text {
     position: fixed;
-    bottom: 24px;
+    bottom: 16px; /* Reduced for better spacing on smaller screens */
     left: 50%;
     transform: translateX(-50%);
     font-family: 'League Spartan', serif;
-    font-size: 14px;
+    font-size: clamp(12px, 1.2vw, 14px); /* Responsive font size */
     font-weight: 500;
     text-align: center;
+    max-width: 90%; /* Prevents overflow on smaller screens */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 480px) {
+    .footer-text {
+        bottom: 12px;
+        font-size: 12px;
+        max-width: 80%;
+    }
 }
 
 /*PHOTOBOOTH*/
 
 .photobooth {
     background-image: url('img/image-bg-1.png');
+    background-size: cover; /* Ensures full coverage */
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Ensures it fills the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 .camera-container {
@@ -110,26 +176,65 @@ button:hover{
     flex-direction: column;
     align-items: center;
     gap: 16px;
+    width: 100%;
+    max-width: 600px; /* Prevents excessive stretching on larger screens */
+    padding: 16px;
 }
 
 video {
-    width: 480px;
-    height: 360px;
+    width: 100%; /* Makes the video responsive */
+    max-width: 480px; /* Prevents it from being too large */
+    height: auto; /* Maintains aspect ratio */
     border: 16px solid var(--white);
     background-color: #080808;
     border-radius: 8px;
 }
 
+/* Countdown text */
 #countdown {
-    font-size: 24px;
+    font-size: clamp(18px, 2vw, 24px); /* Scales font size responsively */
     font-weight: bold;
     color: var(--text-color);
     margin-top: 10px;
+    text-align: center;
 }
 
-#counter{
-    font-size: 20px;
+#counter {
+    font-size: clamp(16px, 1.8vw, 20px); /* Scales font size */
 }
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .camera-container {
+        max-width: 90%;
+    }
+
+    video {
+        max-width: 100%;
+        border-width: 12px;
+    }
+}
+
+/* Further adjustments for mobile screens */
+@media (max-width: 480px) {
+    .camera-container {
+        gap: 12px;
+    }
+
+    video {
+        border-width: 8px;
+        border-radius: 6px;
+    }
+
+    #countdown {
+        font-size: 18px;
+    }
+
+    #counter {
+        font-size: 16px;
+    }
+}
+
 
 /*DOWNLOAD*/
 
@@ -139,22 +244,28 @@ body.download {
     align-items: center; 
     height: 100vh;
     margin: 0;
-    flex-direction: column; 
+    flex-direction: column;
+    padding: 20px; /* Prevents content from touching edges on small screens */
 }
 
-
+/* Main container layout */
 .main-container {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 40px; 
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 
+/* Responsive Canvas */
 #finalCanvas {
     max-width: 60vw;
     max-height: 60vh;
+    width: 100%; /* Makes it responsive */
+    height: auto;
 }
 
+/* Right Section */
 .right {
     margin-left: 50px;
     display: flex;
@@ -164,16 +275,21 @@ body.download {
     gap: 20px;
     padding: 20px;
     border-radius: 12px;
+    width: 100%;
+    max-width: 400px; /* Prevents excessive stretching */
 }
 
+/* Color grid */
 .color-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    grid-template-rows: repeat(2, auto); 
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Adjusts based on available space */
+    grid-gap: 10px;
     justify-content: center;
+    width: 100%;
+    max-width: 300px; /* Prevents it from being too wide */
 }
 
+/* Color buttons */
 .color-btn {
     width: 80px;
     height: 80px;
@@ -187,15 +303,52 @@ body.download {
     transform: scale(1.1);
 }
 
-.button-last{
+/* Button container */
+.button-last {
     display: flex;
     gap: 8px; /* Adds spacing between buttons */
-    margin-top: 50px;
+    margin-top: 30px;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    flex-wrap: wrap; /* Ensures buttons wrap on smaller screens */
+    justify-content: center;
 }
 
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .right {
+        margin-left: 0;
+        max-width: 100%;
+    }
+
+    .color-btn {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .color-grid {
+        grid-template-columns: repeat(2, 1fr); /* Adjust grid for small screens */
+    }
+
+    .color-btn {
+        width: 50px;
+        height: 50px;
+        border-width: 3px;
+    }
+
+    .button-last {
+        flex-direction: column;
+        align-items: center;
+    }
+}
