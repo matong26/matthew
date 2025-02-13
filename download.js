@@ -13,7 +13,7 @@ if (capturedPhotos.length === 0) {
 // Canvas dimensions
 const canvasWidth = 240; // Single column width
 const imageHeight = 160; // Height of each photo
-const spacing = 20; // Space between images
+const spacing = 10; // Space between images
 const framePadding = 10; // Space around the images
 const logoSpace = 100; // Extra space at the bottom for the logo
 
