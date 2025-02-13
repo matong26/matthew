@@ -244,28 +244,22 @@ body.download {
     align-items: center; 
     height: 100vh;
     margin: 0;
-    flex-direction: column;
-    padding: 20px; /* Prevents content from touching edges on small screens */
+    flex-direction: column; 
 }
 
-/* Main container layout */
+
 .main-container {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 40px; 
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 
-/* Responsive Canvas */
 #finalCanvas {
     max-width: 60vw;
     max-height: 60vh;
-    width: 100%; /* Makes it responsive */
-    height: auto;
 }
 
-/* Right Section */
 .right {
     margin-left: 50px;
     display: flex;
@@ -275,21 +269,34 @@ body.download {
     gap: 20px;
     padding: 20px;
     border-radius: 12px;
-    width: 100%;
-    max-width: 400px; /* Prevents excessive stretching */
 }
 
-/* Color grid */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* Stacks elements vertically */
+        align-items: center;
+        gap: 20px; /* Reduces gap for better spacing */
+    }
+
+    .right {
+        margin-left: 0;
+        max-width: 100%;
+    }
+
+    #finalCanvas {
+        max-width: 90vw; /* Allows canvas to take more width on small screens */
+        max-height: 50vh; /* Adjusts max height */
+    }
+}
+
 .color-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Adjusts based on available space */
-    grid-gap: 10px;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(2, auto); 
+    gap: 10px;
     justify-content: center;
-    width: 100%;
-    max-width: 300px; /* Prevents it from being too wide */
 }
 
-/* Color buttons */
 .color-btn {
     width: 80px;
     height: 80px;
@@ -303,52 +310,14 @@ body.download {
     transform: scale(1.1);
 }
 
-/* Button container */
-.button-last {
+.button-last{
     display: flex;
     gap: 8px; /* Adds spacing between buttons */
-    margin-top: 30px;
+    margin-top: 50px;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     color: white;
     cursor: pointer;
     border-radius: 5px;
-    flex-wrap: wrap; /* Ensures buttons wrap on smaller screens */
-    justify-content: center;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .main-container {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .right {
-        margin-left: 0;
-        max-width: 100%;
-    }
-
-    .color-btn {
-        width: 60px;
-        height: 60px;
-    }
-}
-
-@media (max-width: 480px) {
-    .color-grid {
-        grid-template-columns: repeat(2, 1fr); /* Adjust grid for small screens */
-    }
-
-    .color-btn {
-        width: 50px;
-        height: 50px;
-        border-width: 3px;
-    }
-
-    .button-last {
-        flex-direction: column;
-        align-items: center;
-    }
 }
