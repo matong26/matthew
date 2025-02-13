@@ -1,0 +1,192 @@
+:root{
+    --primary-color: #5757BA;
+    --text-color: #080808;
+    --accent-color: #FFB6C1;
+    --white: #FFFFFF;
+}
+
+
+.logo1 {
+    margin-top: 100px;
+    font-family: 'Koulen', sans-serif;
+    font-size: 48px;
+}
+
+.logo2 {
+    padding-left: 2em;
+    font-family: 'Koulen', sans-serif;
+    font-size: 24px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Kreon', sans-serif;
+    text-align: center;
+    gap: min(5vh, 60px);
+    padding: 5vh 5vw;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.home{
+    background-image: url('img/image-bg.png');
+}
+
+.instructions, .photobooth, .download{
+    background-image: url('img/image-bg-1.png');
+}
+
+img{
+    max-width: 500px;
+}
+
+.star{
+    margin-top: -70px;
+}
+
+button{
+    display: flex;
+    color: var(--white);
+    align-items: center;
+    font-family: 'Kreon', serif;
+    font-size: 20px;
+    background-color: var(--primary-color);
+    padding: 12px 24px;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 8px;
+}
+
+#ready-btn, #start-btn{
+    position: fixed;
+    bottom: calc(56px + 56px); /* 56px above the footer */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+a{
+    text-decoration: none;
+}
+
+button:hover{
+    color: var(--text-color);
+    background-color: var(--accent-color);
+}
+
+.footer-text {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'League Spartan', serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/*PHOTOBOOTH*/
+
+.photobooth {
+    background-image: url('img/image-bg-1.png');
+}
+
+.camera-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+video {
+    width: 480px;
+    height: 360px;
+    border: 16px solid var(--white);
+    background-color: #080808;
+    border-radius: 8px;
+}
+
+#countdown {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-top: 10px;
+}
+
+#counter{
+    font-size: 20px;
+}
+
+/*DOWNLOAD*/
+
+body.download {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    margin: 0;
+    flex-direction: column; 
+}
+
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; 
+}
+
+#finalCanvas {
+    max-width: 60vw;
+    max-height: 60vh;
+}
+
+.right {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(2, auto); 
+    gap: 10px;
+    justify-content: center;
+}
+
+.color-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid white;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+#download-btn{
+    margin-top: 50px;
+}
