@@ -1,6 +1,20 @@
 const video = document.getElementById("video");
 const countdownEl = document.getElementById("countdown");
 const counterEl = document.getElementById("counter");
+const shutterOverlay = document.createElement("div");
+shutterOverlay.style.position = "absolute";
+shutterOverlay.style.top = "0";
+shutterOverlay.style.left = "0";
+shutterOverlay.style.width = "100%";
+shutterOverlay.style.height = "100%";
+shutterOverlay.style.background = "white";
+shutterOverlay.style.opacity = "0";
+shutterOverlay.style.transition = "opacity 0.2s ease-out";
+document.body.appendChild(shutterOverlay);
+
+const shutterSound = new Audio("shutter.mp3");
+const countdownSound = new Audio("countdown.mp3");
+
 const capturedPhotos = [];
 let capturedCount = 0;
 
@@ -27,9 +41,15 @@ function capturePhotoWithCountdown() {
     let timeLeft = 5;
     countdownEl.textContent = timeLeft;
     counterEl.textContent = `${capturedCount}/4`;
+    countdownSound.play();
     const countdownInterval = setInterval(() => {
         timeLeft--;
         countdownEl.textContent = timeLeft;
+        countdownSound.play();
+
+        if (timeLeft === 1) {
+            triggerShutterAnimation();
+        }
 
         if (timeLeft <= 1) {
             clearInterval(countdownInterval);
@@ -52,6 +72,15 @@ function capturePhoto() {
 
     // Continue to next photo
     setTimeout(capturePhotoWithCountdown, 1000);
+}
+
+// Shutter animation
+function triggerShutterAnimation() {
+    shutterOverlay.style.opacity = "1";
+    shutterSound.play();
+    setTimeout(() => {
+        shutterOverlay.style.opacity = "0";
+    }, 100);
 }
 
 // Redirect to download page with captured images
