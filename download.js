@@ -23,40 +23,49 @@ finalCanvas.height = framePadding + (imageHeight + spacing) * capturedPhotos.len
 
 // Function to draw the collage with frame color & logo
 function drawCollage() {
-    ctx.fillStyle = selectedFrameColor;
-    ctx.fillRect(0, 0, finalCanvas.width, finalCanvas.height); // Fill background with frame color
+    const background = new Image();
+    background.src = selectedFrameColor; // Use selected image URL instead of color
 
-    capturedPhotos.forEach((photo, index) => {
-        const img = new Image();
-        img.src = photo;
+    background.onload = () => {
+        ctx.drawImage(background, 0, 0, finalCanvas.width, finalCanvas.height); // Draw background image
 
-        img.onload = () => {
-            const x = framePadding; // Left padding
-            const y = framePadding + index * (imageHeight + spacing); // Stack vertically with spacing
-            ctx.drawImage(img, x, y, canvasWidth - 2 * framePadding, imageHeight); // Draw image
+        capturedPhotos.forEach((photo, index) => {
+            const img = new Image();
+            img.src = photo;
+
+            img.onload = () => {
+                const x = framePadding; 
+                const y = framePadding + index * (imageHeight + spacing); 
+                ctx.drawImage(img, x, y, canvasWidth - 2 * framePadding, imageHeight);
+            };
+
+            img.onerror = () => {
+                console.error(`Failed to load image ${index + 1}`);
+            };
+        });
+
+        // Draw the logo at the bottom
+        const logo = new Image();
+        logo.src = "img/logo.png"; 
+
+        logo.onload = () => {
+            const logoWidth = 80; 
+            const logoHeight = 20;
+            const logoX = (canvasWidth - logoWidth) / 2; 
+            const logoY = finalCanvas.height - logoSpace + 35;
+            ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
         };
 
-        img.onerror = () => {
-            console.error(`Failed to load image ${index + 1}`);
+        logo.onerror = () => {
+            console.error("Failed to load logo image.");
         };
-    });
-
-    // Draw the logo at the bottom
-    const logo = new Image();
-    logo.src = "img/logo.png"; // Replace with your logo URL or file path
-
-    logo.onload = () => {
-        const logoWidth = 80; // Adjust based on logo size
-        const logoHeight = 20;
-        const logoX = (canvasWidth - logoWidth) / 2; // Center horizontally
-        const logoY = finalCanvas.height - logoSpace + 35; // Position at the bottom
-        ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
     };
 
-    logo.onerror = () => {
-        console.error("Failed to load logo image.");
+    background.onerror = () => {
+        console.error("Failed to load background image.");
     };
 }
+
 
 // Change frame color when user selects a button
 colorButtons.forEach(button => {
@@ -65,6 +74,8 @@ colorButtons.forEach(button => {
         drawCollage();
     });
 });
+
+
 
 // Download the final image
 downloadBtn.addEventListener("click", () => {
