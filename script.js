@@ -65,7 +65,12 @@ function capturePhoto() {
     canvas.height = 360;
     const ctx = canvas.getContext("2d");
 
+    // Flip canvas horizontally
+    ctx.translate(canvas.width, 0);
+    ctx.scale(-1, 1);
+
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
     capturedPhotos.push(canvas.toDataURL("image/png"));
     capturedCount++;
     counterEl.textContent = `${capturedCount}/4`;
