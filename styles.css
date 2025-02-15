@@ -19,17 +19,20 @@ html, body {
     font-size: 4vw; 
     text-align: center; 
 }
+
 @media (max-width: 768px) {
     .logo1 {
-        font-size: 6vw;
-        margin-top: 5vh;
+        font-size: 8vw;
+        margin-top: 7vh; 
     }
 }
 
 @media (max-width: 480px) {
     .logo1 {
-        font-size: 8vw;
-        margin-top: 3vh;
+        font-size: 10vw;
+        margin-top: 5vh; 
+        margin-bottom: 100px;
+
     }
 }
 
@@ -79,7 +82,7 @@ img {
 @media (min-width: 700px) {
     img {
         max-width: 500px; 
-        padding-top: 30px;
+        padding-top: 50px;
         padding-bottom: 30px;
     }
 }
@@ -107,14 +110,14 @@ button {
 
 @media (max-width: 768px) {
     button {
-        font-size: 18px;
+        font-size: 24px;
         padding: 10px 16px;
     }
 }
 
 @media (max-width: 480px) {
     button {
-        font-size: 16px;
+        font-size: 20px;
         padding: 8px 14px;
     }
 }
@@ -151,14 +154,13 @@ button:hover{
 
 @media (max-width: 480px) {
     .footer-text {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        transform: none;
+        position: absolute;
+        bottom: 10px; /* Adjust this value as needed */
+        left: 50%;
+        transform: translateX(-50%);
         text-align: center;
         font-size: 12px;
         max-width: 80%;
-        margin: 10px auto;
     }
 }
 
