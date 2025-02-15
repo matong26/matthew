@@ -254,6 +254,18 @@ body .download {
         padding: 10px 16px;
     }
 
+    .footer-text {
+        position: fixed; 
+        bottom: 10px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        text-align: center;
+        font-size: 14px;
+        max-width: 90%;
+        margin-top: 50px;
+        padding: 5px 10px;
+    }
+
     .main-container {
         flex-direction: row; 
         align-items: center;
@@ -263,7 +275,7 @@ body .download {
         overflow-x: auto; 
         white-space: nowrap; 
         padding: 10px; 
-        margin-bottom: -90px;
+        margin-bottom: 50px;
     }
 
     .right {
@@ -274,7 +286,7 @@ body .download {
 
     #finalCanvas {
         width: 100%; 
-        max-width: 90vw; 
+        max-width: 40vw; 
         height: auto; 
         max-height: 60vh; 
         object-fit: contain; 
@@ -304,14 +316,17 @@ body .download {
     }
 
     img {
-        max-width: 250px; 
-        padding-top: auto;
-        padding-bottom: 30px;
-    }
-
+        max-width: 250px;
+        display: block; 
+        margin: 0 auto;
+        padding-top: 10px; 
+        padding-bottom: 10px; 
+    
     button {
         font-size: 20px;
         padding: 8px 14px;
+        display: block; 
+        margin: 10px auto; 
     }
 
     .main-container {
@@ -327,14 +342,15 @@ body .download {
     }
 
     .footer-text {
-        position: relative; 
-        bottom: auto; 
-        left: auto;
-        transform: none; 
+        position: fixed; 
+        bottom: 10px; 
+        left: 50%; 
+        transform: translateX(-50%); 
         text-align: center;
         font-size: 10px;
-        max-width: 100%;
-        margin-top: 10px; 
+        max-width: 90%;
+        background: rgba(255, 255, 255, 0.8); 
+        padding: 5px 10px;
     }
 
     h2{
@@ -367,4 +383,5 @@ body .download {
     #counter {
         font-size: 16px;
     }
+}
 }
