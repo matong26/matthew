@@ -310,7 +310,7 @@ body .download {
 @media (max-width: 480px) {
 
     .logo1 {
-        font-size: 48px;
+        font-size: 32px;
         margin-bottom: 50px;
     }
 
@@ -324,7 +324,7 @@ body .download {
         font-size: 20px;
         padding: 8px 14px;
         display: block; 
-        margin: 10px auto; 
+        margin-top: 50px;
     }
 
     .main-container {
