@@ -23,8 +23,8 @@ const isMobile = window.innerWidth <= 600;
 const videoConstraints = {
     video: {
         facingMode: "user", // Use front camera on mobile
-        width: isMobile ? { ideal: 320 } : { ideal: 480 },
-        height: isMobile ? { ideal: 240 } : { ideal: 360 }
+        width: isMobile ? { ideal: 480 } : { ideal: 640 },
+        height: isMobile ? { ideal: 640 } : { ideal: 480 }
     }
 };
 
@@ -77,8 +77,8 @@ function capturePhotoWithCountdown() {
 // Capture photo
 function capturePhoto() {
     const canvas = document.createElement("canvas");
-    canvas.width = isMobile ? 320 : 480;
-    canvas.height = isMobile ? 240 : 360;
+    canvas.width = isMobile ? 480 : 640;
+    canvas.height = isMobile ? 640 : 480;
     const ctx = canvas.getContext("2d");
 
     // Flip canvas horizontally for front camera
