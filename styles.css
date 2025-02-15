@@ -306,6 +306,12 @@ body .download {
 
     }
 
+    img {
+        max-width: 250px; 
+        padding-top: auto;
+        padding-bottom: 30px;
+    }
+
     button {
         font-size: 20px;
         padding: 8px 14px;
@@ -313,7 +319,7 @@ body .download {
 
     .footer-text {
         position: absolute;
-        bottom: 10px; 
+        bottom: 10px; /* Adjust this value as needed */
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
@@ -339,5 +345,3 @@ body .download {
         font-size: 16px;
     }
 }
-
-
