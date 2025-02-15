@@ -303,7 +303,6 @@ body .download {
         font-size: 10vw;
         margin-top: 5vh; 
         margin-bottom: 100px;
-
     }
 
     img {
@@ -317,14 +316,28 @@ body .download {
         padding: 8px 14px;
     }
 
+    .main-container {
+        flex-direction: row; 
+        align-items: center;
+        gap: 20px; 
+        max-width: 100vw;
+        flex-wrap: wrap; 
+        overflow-x: auto; 
+        white-space: nowrap; 
+        padding: 10px; 
+        margin-bottom: 0; 
+        padding-bottom: 50px; 
+    }
+
     .footer-text {
-        position: absolute;
-        bottom: 10px; /* Adjust this value as needed */
-        left: 50%;
-        transform: translateX(-50%);
+        position: relative; 
+        bottom: auto; 
+        left: auto;
+        transform: none; 
         text-align: center;
         font-size: 12px;
         max-width: 80%;
+        margin-top: 10px; 
     }
 
     .camera-container {
