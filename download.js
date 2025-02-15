@@ -11,11 +11,11 @@ if (capturedPhotos.length === 0) {
 }
 
 // Canvas dimensions
-const canvasWidth = 240; // Single column width
-const imageHeight = 160; // Height of each photo
-const spacing = 10; // Space between images
-const framePadding = 10; // Space around the images
-const logoSpace = 100; // Extra space at the bottom for the logo
+const canvasWidth = 240; 
+const imageHeight = 160; 
+const spacing = 10; 
+const framePadding = 10; 
+const logoSpace = 100; 
 
 // Adjust canvas height dynamically based on the number of images + logo space
 finalCanvas.width = canvasWidth;
@@ -24,10 +24,10 @@ finalCanvas.height = framePadding + (imageHeight + spacing) * capturedPhotos.len
 // Function to draw the collage with frame color & logo
 function drawCollage() {
     const background = new Image();
-    background.src = selectedFrameColor; // Use selected image URL instead of color
+    background.src = selectedFrameColor; 
 
     background.onload = () => {
-        ctx.drawImage(background, 0, 0, finalCanvas.width, finalCanvas.height); // Draw background image
+        ctx.drawImage(background, 0, 0, finalCanvas.width, finalCanvas.height); 
 
         capturedPhotos.forEach((photo, index) => {
             const img = new Image();
