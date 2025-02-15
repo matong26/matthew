@@ -23,15 +23,21 @@ const isMobile = window.innerWidth <= 600;
 const videoConstraints = {
     video: {
         facingMode: "user", // Use front camera on mobile
-        width: isMobile ? 320 : 480,
-        height: isMobile ? 240 : 360
+        width: isMobile ? { ideal: 320 } : { ideal: 480 },
+        height: isMobile ? { ideal: 240 } : { ideal: 360 }
     }
 };
+
+// Fix for mobile Chrome black screen issue
+video.setAttribute("playsinline", true);
+video.setAttribute("autoplay", true);
+video.setAttribute("muted", true);
 
 // Start webcam
 navigator.mediaDevices.getUserMedia(videoConstraints)
     .then(stream => {
         video.srcObject = stream;
+        video.play();
         startCaptureProcess();
     })
     .catch(err => console.error("Camera access denied", err));
