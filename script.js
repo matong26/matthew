@@ -18,8 +18,18 @@ const countdownSound = new Audio("countdown.mp3");
 const capturedPhotos = [];
 let capturedCount = 0;
 
+// Adjust constraints for mobile
+const isMobile = window.innerWidth <= 600;
+const videoConstraints = {
+    video: {
+        facingMode: "user", // Use front camera on mobile
+        width: isMobile ? 320 : 480,
+        height: isMobile ? 240 : 360
+    }
+};
+
 // Start webcam
-navigator.mediaDevices.getUserMedia({ video: true })
+navigator.mediaDevices.getUserMedia(videoConstraints)
     .then(stream => {
         video.srcObject = stream;
         startCaptureProcess();
@@ -61,11 +71,11 @@ function capturePhotoWithCountdown() {
 // Capture photo
 function capturePhoto() {
     const canvas = document.createElement("canvas");
-    canvas.width = 480;
-    canvas.height = 360;
+    canvas.width = isMobile ? 320 : 480;
+    canvas.height = isMobile ? 240 : 360;
     const ctx = canvas.getContext("2d");
 
-    // Flip canvas horizontally
+    // Flip canvas horizontally for front camera
     ctx.translate(canvas.width, 0);
     ctx.scale(-1, 1);
 
