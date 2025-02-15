@@ -1,95 +1,86 @@
-const video = document.getElementById("video");
-const countdownEl = document.getElementById("countdown");
-const counterEl = document.getElementById("counter");
-const shutterOverlay = document.createElement("div");
-shutterOverlay.style.position = "absolute";
-shutterOverlay.style.top = "0";
-shutterOverlay.style.left = "0";
-shutterOverlay.style.width = "100%";
-shutterOverlay.style.height = "100%";
-shutterOverlay.style.background = "white";
-shutterOverlay.style.opacity = "0";
-shutterOverlay.style.transition = "opacity 0.2s ease-out";
-document.body.appendChild(shutterOverlay);
+const finalCanvas = document.getElementById("finalCanvas");
+const ctx = finalCanvas.getContext("2d");
+const downloadBtn = document.getElementById("download-btn");
+const colorButtons = document.querySelectorAll(".color-btn");
 
-const shutterSound = new Audio("shutter.mp3");
-const countdownSound = new Audio("countdown.mp3");
+let selectedFrameColor = "img/nude.png"; // Default frame
 
-const capturedPhotos = [];
-let capturedCount = 0;
+let capturedPhotos = JSON.parse(sessionStorage.getItem("capturedPhotos")) || [];
 
-// Start webcam
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => {
-        video.srcObject = stream;
-        startCaptureProcess();
-    })
-    .catch(err => console.error("Camera access denied", err));
-
-// Start auto capture process
-function startCaptureProcess() {
-    capturePhotoWithCountdown();
+if (capturedPhotos.length === 0) {
+    console.error("No photos found in sessionStorage.");
 }
 
-// Countdown and capture photo
-function capturePhotoWithCountdown() {
-    if (capturedCount >= 4) {
-        redirectToDownload();
-        return;
-    }
+// Canvas dimensions
+const canvasWidth = 240;
+const imageHeight = 160;
+const spacing = 10;
+const framePadding = 10;
+const logoSpace = 100;
 
-    let timeLeft = 5;
-    countdownEl.textContent = timeLeft;
-    counterEl.textContent = `${capturedCount}/4`;
-    countdownSound.play();
-    const countdownInterval = setInterval(() => {
-        timeLeft--;
-        countdownEl.textContent = timeLeft;
-        countdownSound.play();
+finalCanvas.width = canvasWidth;
+finalCanvas.height = framePadding + (imageHeight + spacing) * capturedPhotos.length + logoSpace;
 
-        if (timeLeft === 1) {
-            triggerShutterAnimation();
-        }
+// Function to draw the collage
+function drawCollage() {
+    const background = new Image();
+    background.src = selectedFrameColor;
 
-        if (timeLeft <= 1) {
-            clearInterval(countdownInterval);
-            capturePhoto();
-        }
-    }, 1000);
+    background.onload = () => {
+        ctx.clearRect(0, 0, finalCanvas.width, finalCanvas.height);
+        ctx.drawImage(background, 0, 0, finalCanvas.width, finalCanvas.height);
+
+        capturedPhotos.forEach((photo, index) => {
+            const img = new Image();
+            img.src = photo;
+
+            img.onload = () => {
+                const x = framePadding;
+                const y = framePadding + index * (imageHeight + spacing);
+                ctx.drawImage(img, x, y, canvasWidth - 2 * framePadding, imageHeight);
+            };
+
+            img.onerror = () => console.error(`Failed to load image ${index + 1}`);
+        });
+
+        // Draw the logo immediately after the background
+        drawLogo();
+    };
+
+    background.onerror = () => console.error("Failed to load background image.");
 }
 
-// Capture photo
-function capturePhoto() {
-    const canvas = document.createElement("canvas");
-    canvas.width = 480;
-    canvas.height = 360;
-    const ctx = canvas.getContext("2d");
+// Function to draw the logo
+function drawLogo() {
+    const logo = new Image();
+    logo.src = "img/logo.png";
 
-    // Flip canvas horizontally
-    ctx.translate(canvas.width, 0);
-    ctx.scale(-1, 1);
+    logo.onload = () => {
+        const logoWidth = 80;
+        const logoHeight = 20;
+        const logoX = (canvasWidth - logoWidth) / 2;
+        const logoY = finalCanvas.height - logoSpace + 35;
+        ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
+    };
 
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    capturedPhotos.push(canvas.toDataURL("image/png"));
-    capturedCount++;
-    counterEl.textContent = `${capturedCount}/4`;
-
-    // Continue to next photo
-    setTimeout(capturePhotoWithCountdown, 1000);
+    logo.onerror = () => console.error("Failed to load logo image.");
 }
 
-// Shutter animation
-function triggerShutterAnimation() {
-    shutterOverlay.style.opacity = "1";
-    shutterSound.play();
-    setTimeout(() => {
-        shutterOverlay.style.opacity = "0";
-    }, 100);
-}
+// Change frame color and redraw instantly
+colorButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+        selectedFrameColor = event.target.getAttribute("data-color");
+        drawCollage();
+    });
+});
 
-// Redirect to download page with captured images
-function redirectToDownload() {
-    sessionStorage.setItem("capturedPhotos", JSON.stringify(capturedPhotos));
-    window.location.href = "download.html";
-}
+// Download the final image
+downloadBtn.addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.href = finalCanvas.toDataURL("image/png");
+    link.download = "photobooth.png";
+    link.click();
+});
+
+// Initial drawing
+drawCollage();
