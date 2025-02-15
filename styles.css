@@ -5,6 +5,13 @@
     --white: #FFFFFF;
 }
 
+html, body {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 
 .logo1 {
     margin-top: 10vh; 
@@ -144,9 +151,14 @@ button:hover{
 
 @media (max-width: 480px) {
     .footer-text {
-        bottom: 12px;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        text-align: center;
         font-size: 12px;
         max-width: 80%;
+        margin: 20px auto;
     }
 }
 
@@ -157,7 +169,7 @@ button:hover{
     background-size: cover; 
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh; 
+    height: 100vh; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -170,16 +182,18 @@ button:hover{
     align-items: center;
     gap: 16px;
     width: 100%;
-    max-width: 600px; 
+    max-width: 600px;
     padding: 16px;
+    height: 100vh; 
+    justify-content: center; 
 }
 
 video {
-    width: 100%; 
-    max-width: 480px; 
-    height: auto; 
+    width: 100%;
+    max-width: 480px;
+    height: auto;
     border: 16px solid var(--white);
-    background-color: #080808;
+    background-color: var(--white);
     border-radius: 8px;
     transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -187,11 +201,11 @@ video {
 }
 
 /* Countdown text */
+
 #countdown {
     font-size: clamp(18px, 2vw, 24px); 
     font-weight: bold;
     color: var(--text-color);
-    margin-top: 10px;
     text-align: center;
 }
 
@@ -213,6 +227,7 @@ video {
 @media (max-width: 480px) {
     .camera-container {
         gap: 12px;
+        height: 100vh; 
     }
 
     video {
